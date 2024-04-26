@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quant_bot_front/views/calculator_page.dart';
 import 'package:quant_bot_front/views/home_page.dart';
 
 final GoRouter _router = GoRouter(
@@ -13,7 +14,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/calculator',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
+        return const CalculatorPage();
       },
     ),
   ],
@@ -28,12 +29,12 @@ class QuantBot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF002E5B)),
         useMaterial3: true,
       ),
-      home: const HomePage(),
     );
   }
 }

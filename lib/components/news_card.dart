@@ -45,7 +45,7 @@ class _NewsCardState extends State<NewsCard> {
                 child: const Text(
                   '뉴스 더 보기',
                   style: TextStyle(
-                    color: Colors.white24,
+                    color: Colors.white,
                   ),
                 ),
               ),
