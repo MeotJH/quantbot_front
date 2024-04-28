@@ -1,0 +1,23 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class DioNotifier extends Notifier<Dio> {
+  late Dio _dio;
+  DioNotifier() {
+    _dio = Dio(BaseOptions(
+      baseUrl: 'http://quant-bot.iptime.org',
+    ));
+  }
+  @override
+  Dio build() {
+    return _dio;
+  }
+
+  void updateAccessToken(String token) {
+    _dio.options = _dio.options.copyWith(
+      headers: {'Authorization': 'Bearer $token'},
+    );
+  }
+}
+
+final dioProvider = NotifierProvider<DioNotifier, Dio>(DioNotifier.new);

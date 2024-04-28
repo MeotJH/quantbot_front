@@ -1,17 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:quant_bot_front/components/news_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
+import 'package:quant_bot_front/providers/dio_providers';
+import 'package:quant_bot_front/providers/home_provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
+  final List<String> entries = <String>[
+    'A',
+    'B',
+    'C',
+    'A',
+    'B',
+    'C',
+    'A',
+    'B',
+    'C',
+    'A',
+    'B',
+    'C',
+    'A',
+    'B',
+    'C',
+    'A',
+    'B',
+    'C'
+  ];
+  final List<int> colorCodes = <int>[
+    600,
+    500,
+    100,
+    600,
+    500,
+    100,
+    600,
+    500,
+    100,
+    600,
+    500,
+    100,
+    600,
+    500,
+    100,
+    600,
+    500,
+    100
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final test = ref.watch(homepageProvider);
     return Scaffold(
       backgroundColor: const Color(0xFF002E5B),
       appBar: AppBar(
@@ -60,10 +104,22 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              const NewsCard(),
-              const NewsCard(),
-              const NewsCard(),
-              const NewsCard(),
+              ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(8),
+                itemCount: entries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  print('aaaa $test');
+
+                  return Container(
+                    height: 50,
+                    color: Colors.amber[colorCodes[index]],
+                    child: Center(child: Text('Entry ${entries[index]}')),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+              )
             ],
           ),
         ),
