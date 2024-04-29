@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
 import 'package:quant_bot_front/providers/dio_providers';
@@ -55,7 +56,6 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final test = ref.watch(homepageProvider);
     return Scaffold(
       backgroundColor: const Color(0xFF002E5B),
       appBar: AppBar(
@@ -107,18 +107,44 @@ class _HomePageState extends ConsumerState<HomePage> {
               ListView.separated(
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(8),
-                itemCount: entries.length,
+                itemCount: 6,
                 itemBuilder: (BuildContext context, int index) {
-                  print('aaaa $test');
-
-                  return Container(
-                    height: 50,
-                    color: Colors.amber[colorCodes[index]],
-                    child: Center(child: Text('Entry ${entries[index]}')),
-                  );
+                  return ref.watch(homepageProvider).when(
+                        data: (data) {
+                          return Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color.fromARGB(120, 120, 167, 225),
+                                  Color.fromARGB(194, 3, 16, 33),
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                            child: Center(
+                                child: Text(
+                              data[index].alt,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
+                            )),
+                          );
+                        },
+                        loading: () => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        error: (error, stackTrace) => Center(
+                          child: Text(
+                            '에러: $error, $stackTrace',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                separatorBuilder: (BuildContext context, int index) => const Divider(),
               )
             ],
           ),
