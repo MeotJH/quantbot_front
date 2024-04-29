@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
 import 'package:quant_bot_front/providers/dio_providers';
 import 'package:quant_bot_front/providers/home_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -111,26 +112,34 @@ class _HomePageState extends ConsumerState<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   return ref.watch(homepageProvider).when(
                         data: (data) {
-                          return Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(120, 120, 167, 225),
-                                  Color.fromARGB(194, 3, 16, 33),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
+                          return TextButton(
+                            onPressed: () async {
+                              final Uri toLaunch =
+                                  Uri(scheme: 'https', host: 'www.hankyung.com', path: 'article/2024042951015');
+
+                              await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(120, 120, 167, 225),
+                                    Color.fromARGB(194, 3, 16, 33),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
                               ),
+                              child: Center(
+                                  child: Text(
+                                data[index].alt,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              )),
                             ),
-                            child: Center(
-                                child: Text(
-                              data[index].alt,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            )),
                           );
                         },
                         loading: () => const Center(
