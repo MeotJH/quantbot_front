@@ -105,12 +105,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                 ],
               ),
+              const Text(
+                '한국 뉴스',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
               ListView.separated(
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(8),
                 itemCount: 6,
                 itemBuilder: (BuildContext context, int index) {
-                  return ref.watch(homepageProvider).when(
+                  return ref.watch(homeNewsProvider).when(
                         data: (data) {
                           return TextButton(
                             onPressed: () async {
@@ -118,7 +125,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
-                              height: 50,
+                              height: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(
@@ -133,7 +140,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                               child: Center(
                                   child: Column(
                                 children: [
-                                  Image.network(data[index].src),
+                                  SizedBox(
+                                    width: 250,
+                                    height: 250,
+                                    child: Image.network(data[index].src),
+                                  ),
                                   Text(
                                     data[index].alt,
                                     style: const TextStyle(
@@ -156,8 +167,46 @@ class _HomePageState extends ConsumerState<HomePage> {
                         ),
                       );
                 },
-                separatorBuilder: (BuildContext context, int index) => const Divider(),
-              )
+                separatorBuilder: (
+                  BuildContext context,
+                  int index,
+                ) =>
+                    const Divider(),
+              ),
+              const Text(
+                '오늘의 한국 시황',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+              ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) {
+                    return ref.watch(homeMaketProvider).when(
+                          data: (data) {
+                            return null;
+                          },
+                          loading: () => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          error: (error, stackTrace) => Center(
+                            child: Text(
+                              '에러: $error, $stackTrace',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                  },
+                  separatorBuilder: (
+                    BuildContext context,
+                    int index,
+                  ) =>
+                      const Divider(),
+                  itemCount: 2)
             ],
           ),
         ),
