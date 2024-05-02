@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
-import 'package:quant_bot_front/providers/dio_providers';
 import 'package:quant_bot_front/providers/home_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,47 +12,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  final List<String> entries = <String>[
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C'
-  ];
-  final List<int> colorCodes = <int>[
-    600,
-    500,
-    100,
-    600,
-    500,
-    100,
-    600,
-    500,
-    100,
-    600,
-    500,
-    100,
-    600,
-    500,
-    100,
-    600,
-    500,
-    100
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +79,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                           return TextButton(
                             onPressed: () async {
                               final Uri toLaunch = Uri.parse(data[index].href);
-                              await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
+                              await launchUrl(toLaunch,
+                                  mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
                               height: 300,

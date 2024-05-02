@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quant_bot_front/providers/tab_provider.dart';
 
-class QuantBottomNavigationBar extends StatefulWidget {
+class QuantBottomNavigationBar extends ConsumerStatefulWidget {
   const QuantBottomNavigationBar({super.key});
 
   @override
-  State<StatefulWidget> createState() => _QuantBottomNavigationBar();
+  ConsumerState<QuantBottomNavigationBar> createState() =>
+      _QuantBottomNavigationBar();
 }
 
-class _QuantBottomNavigationBar extends State<QuantBottomNavigationBar> {
-  int _selectedIndex = 0;
-
+class _QuantBottomNavigationBar
+    extends ConsumerState<QuantBottomNavigationBar> {
   void _onItemTapped(int index, BuildContext context) {
-    //print('index ::: $index, ::::::: ');
+    print('this is navi tab ${ref.read(tabProvider)}');
+
+    final notifier = ref.read(tabProvider.notifier);
+    notifier.setTab(index);
 
     switch (index) {
       case 0:
@@ -27,10 +32,6 @@ class _QuantBottomNavigationBar extends State<QuantBottomNavigationBar> {
       default:
         context.push('/');
     }
-
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   @override
@@ -50,7 +51,7 @@ class _QuantBottomNavigationBar extends State<QuantBottomNavigationBar> {
           label: 'School',
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: ref.read(tabProvider),
       onTap: (index) => _onItemTapped(index, context),
     );
   }
