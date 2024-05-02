@@ -131,11 +131,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 ),
                               ),
                               child: Center(
-                                  child: Text(
-                                data[index].alt,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
+                                  child: Column(
+                                children: [
+                                  Image.network(data[index].src),
+                                  Text(
+                                    data[index].alt,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               )),
                             ),
                           );
