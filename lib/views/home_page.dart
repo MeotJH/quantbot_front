@@ -146,7 +146,36 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ) {
                     return ref.watch(homeMaketProvider).when(
                           data: (data) {
-                            return null;
+                            return Container(
+                              height: 300,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(120, 120, 167, 225),
+                                    Color.fromARGB(194, 3, 16, 33),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Center(
+                                  child: Column(
+                                children: [
+                                  SizedBox(
+                                    width: 250,
+                                    height: 250,
+                                    child: Image.network(data[index].img),
+                                  ),
+                                  Text(
+                                    data[index].data,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                            );
                           },
                           loading: () => const Center(
                             child: CircularProgressIndicator(),
