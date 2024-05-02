@@ -114,9 +114,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         data: (data) {
                           return TextButton(
                             onPressed: () async {
-                              final Uri toLaunch =
-                                  Uri(scheme: 'https', host: 'www.hankyung.com', path: 'article/2024042951015');
-
+                              final Uri toLaunch = Uri.parse(data[index].href);
                               await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
