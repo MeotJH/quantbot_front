@@ -35,15 +35,12 @@ final AutoDisposeFutureProvider<List<HomeMarketModel>> homeMaketProvider = Futur
 
     Color tempColor = Colors.white;
 
-    print('this is market news $marketNews ');
-    print('is true? ${marketNews.contains('상승')}');
     if (marketNews.contains('상승')) {
       tempColor = Colors.red.shade300;
     } else {
       tempColor = Colors.blue.shade300;
     }
 
-    print('this is market tempColor $marketNews ');
     final model = HomeMarketModel(
       name: names[i],
       data: '$marketNews)',

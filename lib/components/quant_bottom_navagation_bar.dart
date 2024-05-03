@@ -7,15 +7,11 @@ class QuantBottomNavigationBar extends ConsumerStatefulWidget {
   const QuantBottomNavigationBar({super.key});
 
   @override
-  ConsumerState<QuantBottomNavigationBar> createState() =>
-      _QuantBottomNavigationBar();
+  ConsumerState<QuantBottomNavigationBar> createState() => _QuantBottomNavigationBar();
 }
 
-class _QuantBottomNavigationBar
-    extends ConsumerState<QuantBottomNavigationBar> {
+class _QuantBottomNavigationBar extends ConsumerState<QuantBottomNavigationBar> {
   void _onItemTapped(int index, BuildContext context) {
-    print('this is navi tab ${ref.read(tabProvider)}');
-
     final notifier = ref.read(tabProvider.notifier);
     notifier.setTab(index);
 
