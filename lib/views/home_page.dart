@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
 import 'package:quant_bot_front/providers/home_provider.dart';
@@ -66,7 +67,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 '한국 뉴스',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               ListView.separated(
@@ -79,8 +81,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           return TextButton(
                             onPressed: () async {
                               final Uri toLaunch = Uri.parse(data[index].href);
-                              await launchUrl(toLaunch,
-                                  mode: LaunchMode.inAppWebView);
+                              await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
                               height: 300,
@@ -135,7 +136,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 '오늘의 한국 시황',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               ListView.separated(
@@ -147,7 +149,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                     return ref.watch(homeMaketProvider).when(
                           data: (data) {
                             return Container(
-                              height: 300,
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
+                              height: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: const LinearGradient(
@@ -161,16 +164,24 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ),
                               child: Center(
                                   child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  Text(
+                                    data[index].name,
+                                    style: TextStyle(
+                                      color: data[index].color,
+                                    ),
+                                  ),
                                   SizedBox(
-                                    width: 250,
-                                    height: 250,
-                                    child: Image.network(data[index].img),
+                                    child: Image.network(
+                                      data[index].img,
+                                      width: 250,
+                                    ),
                                   ),
                                   Text(
                                     data[index].data,
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                    style: TextStyle(
+                                      color: data[index].color,
                                     ),
                                   ),
                                 ],

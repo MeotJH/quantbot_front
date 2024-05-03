@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/models/home_models/home_market_model.dart';
 import 'package:quant_bot_front/models/home_models/home_model.dart';
@@ -27,10 +28,28 @@ final AutoDisposeFutureProvider<List<HomeMarketModel>> homeMaketProvider = Futur
   final markets = response.data['maps'] as Map;
   final data = markets['data'] as List;
   final img = markets['img'] as List;
-
+  final names = ['코스피', '코스닥'];
   List<HomeMarketModel> homeMarketModels = [];
   for (int i = 0; i < data.length; i++) {
-    final model = HomeMarketModel(data: data[i], img: img[i]);
+    final marketNews = (data[i] as String).split(')')[0];
+
+    Color tempColor = Colors.white;
+
+    print('this is market news $marketNews ');
+    print('is true? ${marketNews.contains('상승')}');
+    if (marketNews.contains('상승')) {
+      tempColor = Colors.red.shade300;
+    } else {
+      tempColor = Colors.blue.shade300;
+    }
+
+    print('this is market tempColor $marketNews ');
+    final model = HomeMarketModel(
+      name: names[i],
+      data: '$marketNews)',
+      img: img[i],
+      color: tempColor,
+    );
     homeMarketModels.add(model);
   }
 
