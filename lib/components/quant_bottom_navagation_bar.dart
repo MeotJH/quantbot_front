@@ -14,7 +14,6 @@ class _QuantBottomNavigationBar extends ConsumerState<QuantBottomNavigationBar> 
   void _onItemTapped(int index, BuildContext context) {
     final notifier = ref.read(tabProvider.notifier);
     notifier.setTab(index);
-
     switch (index) {
       case 0:
         context.push('/');
@@ -40,11 +39,11 @@ class _QuantBottomNavigationBar extends ConsumerState<QuantBottomNavigationBar> 
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.business),
-          label: 'Business',
+          label: 'Finance Calculator',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.school),
-          label: 'School',
+          label: 'Quant Investment',
         ),
       ],
       currentIndex: ref.read(tabProvider),
