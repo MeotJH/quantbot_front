@@ -4,9 +4,10 @@ import 'package:quant_bot_front/models/home_models/home_market_model.dart';
 import 'package:quant_bot_front/models/home_models/home_model.dart';
 import 'package:quant_bot_front/providers/dio_providers.dart';
 
-final AutoDisposeFutureProvider<List<HomeModel>> homeNewsProvider = FutureProvider.autoDispose((ref) async {
+final AutoDisposeFutureProvider<List<HomeModel>> homeNewsProvider =
+    FutureProvider.autoDispose((ref) async {
   final dio = ref.read(dioProvider);
-  final response = await dio.get('/api/v1/news/6'); //await dio.get('/api/v1/news/6');
+  final response = await dio.get('/api/v1/news/6');
 
   if (response.statusCode != 200) {
     return [];
@@ -17,7 +18,8 @@ final AutoDisposeFutureProvider<List<HomeModel>> homeNewsProvider = FutureProvid
   return homeModels;
 });
 
-final AutoDisposeFutureProvider<List<HomeMarketModel>> homeMaketProvider = FutureProvider.autoDispose((ref) async {
+final AutoDisposeFutureProvider<List<HomeMarketModel>> homeMaketProvider =
+    FutureProvider.autoDispose((ref) async {
   final dio = ref.read(dioProvider);
   final response = await dio.get('/api/v1/korea/market');
 

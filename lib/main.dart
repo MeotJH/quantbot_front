@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:quant_bot_front/views/calculator_page.dart';
 import 'package:quant_bot_front/views/home_page.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
@@ -22,7 +23,12 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-void main() {
+Future main() async {
+  await dotenv.load();
+  if (const bool.fromEnvironment("IS_PRODUCTION")) {
+    await dotenv.load(fileName: ".env.prod");
+  }
+
   setPathUrlStrategy();
   runApp(const ProviderScope(child: QuantBot()));
 }

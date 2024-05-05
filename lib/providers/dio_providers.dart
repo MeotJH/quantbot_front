@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DioNotifier extends Notifier<Dio> {
   late Dio _dio;
+  static const backEndUrl = "BACK_END_URL";
   DioNotifier() {
+    print('this is backend url ::::::: ${dotenv.get(backEndUrl)}');
     _dio = Dio(BaseOptions(
-      baseUrl: 'http://quant-bot.iptime.org/',
+      baseUrl: dotenv.get(backEndUrl),
     ));
   }
   @override
