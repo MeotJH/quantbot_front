@@ -6,7 +6,6 @@ class DioNotifier extends Notifier<Dio> {
   late Dio _dio;
   static const backEndUrl = "BACK_END_URL";
   DioNotifier() {
-    print('this is backend url ::::::: ${dotenv.get(backEndUrl)}');
     _dio = Dio(BaseOptions(
       baseUrl: dotenv.get(backEndUrl),
     ));

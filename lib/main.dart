@@ -24,9 +24,10 @@ final GoRouter _router = GoRouter(
 );
 
 Future main() async {
-  await dotenv.load();
   if (const bool.fromEnvironment("IS_PRODUCTION")) {
-    await dotenv.load(fileName: ".env.prod");
+    await dotenv.load(fileName: "/assets/prod.env");
+  } else {
+    await dotenv.load(fileName: ".env");
   }
 
   setPathUrlStrategy();
