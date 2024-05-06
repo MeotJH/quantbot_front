@@ -44,6 +44,7 @@ class QuantBot extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF002E5B)),
         useMaterial3: true,
+        fontFamily: 'PretendardRegular',
       ),
     );
   }
