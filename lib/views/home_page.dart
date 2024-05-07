@@ -82,8 +82,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           return TextButton(
                             onPressed: () async {
                               final Uri toLaunch = Uri.parse(data[index].href);
-                              await launchUrl(toLaunch,
-                                  mode: LaunchMode.inAppWebView);
+                              await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
                               height: 300,
@@ -152,8 +151,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     return ref.watch(homeMaketProvider).when(
                           data: (data) {
                             return Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
                               height: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

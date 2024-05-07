@@ -22,7 +22,7 @@ class _QuantBottomNavigationBar extends ConsumerState<QuantBottomNavigationBar> 
         context.push('/calculator');
         break;
       case 2:
-        context.push('/calculator');
+        context.push('/quant-investment');
         break;
       default:
         context.push('/');

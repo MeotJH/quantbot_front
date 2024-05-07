@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quant_bot_front/views/calculator_page.dart';
 import 'package:quant_bot_front/views/home_page.dart';
+import 'package:quant_bot_front/views/quant_investment.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -20,6 +21,12 @@ final GoRouter _router = GoRouter(
         return const CalculatorPage();
       },
     ),
+    GoRoute(
+      path: '/quant-investment',
+      builder: (BuildContext context, GoRouterState state) {
+        return const QuantInvestmentPage();
+      },
+    )
   ],
 );
 

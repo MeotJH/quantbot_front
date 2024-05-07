@@ -43,13 +43,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (percent <= inflation) {
       print('연 투자수익이 물가상승률 보다 커야합니다.');
     }
-    final result =
-        money * (pow((1.0 + inflation), year)) / (percent - inflation);
+    final result = money * (pow((1.0 + inflation), year)) / (percent - inflation);
     print('this is result $result');
     retireResult = result.toStringAsFixed(0);
     setState(() {
-      retireResult =
-          " ${parseKoreaMoney(beforeParse: result.toStringAsFixed(0))}원";
+      retireResult = " ${parseKoreaMoney(beforeParse: result.toStringAsFixed(0))}원";
     });
   }
 
@@ -73,12 +71,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF002E5B),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SingleChildScrollView(
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -288,74 +286,72 @@ class _CalculatorPageState extends State<CalculatorPage> {
                     )
                   ]),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        Colors.grey.withOpacity(0.2), // Set color with opacity
-                    spreadRadius: 2, // Set the spread radius
-                    blurRadius: 2, // Set the blur radius
-                    offset: const Offset(0, 1), // Set the shadow offset
-                  ),
-                ],
-                gradient: const LinearGradient(
-                  colors: [
-                    Color.fromARGB(120, 120, 167, 225),
-                    Color.fromARGB(194, 3, 16, 33),
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2), // Set color with opacity
+                      spreadRadius: 2, // Set the spread radius
+                      blurRadius: 2, // Set the blur radius
+                      offset: const Offset(0, 1), // Set the shadow offset
+                    ),
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(120, 120, 167, 225),
+                      Color.fromARGB(194, 3, 16, 33),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
-              ),
-              child: const ExpansionTile(
-                title: Text(
-                  '적립식 복리 계산기',
-                  style: TextStyle(
-                    color: Colors.white,
+                child: const ExpansionTile(
+                  title: Text(
+                    '적립식 복리 계산기',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        Colors.grey.withOpacity(0.2), // Set color with opacity
-                    spreadRadius: 2, // Set the spread radius
-                    blurRadius: 2, // Set the blur radius
-                    offset: const Offset(0, 1), // Set the shadow offset
-                  ),
-                ],
-                gradient: const LinearGradient(
-                  colors: [
-                    Color.fromARGB(120, 120, 167, 225),
-                    Color.fromARGB(194, 3, 16, 33),
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2), // Set color with opacity
+                      spreadRadius: 2, // Set the spread radius
+                      blurRadius: 2, // Set the blur radius
+                      offset: const Offset(0, 1), // Set the shadow offset
+                    ),
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(120, 120, 167, 225),
+                      Color.fromARGB(194, 3, 16, 33),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
-              ),
-              child: const ExpansionTile(
-                title: Text(
-                  '전세 vs 월세 가성비 계산기',
-                  style: TextStyle(
-                    color: Colors.white,
+                child: const ExpansionTile(
+                  title: Text(
+                    '전세 vs 월세 가성비 계산기',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: const QuantBottomNavigationBar(),
     );
