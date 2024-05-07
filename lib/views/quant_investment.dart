@@ -2,35 +2,108 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
+import 'package:quant_bot_front/providers/dio_providers.dart';
 
 class QuantInvestmentPage extends ConsumerStatefulWidget {
   const QuantInvestmentPage({super.key});
 
   @override
-  ConsumerState<QuantInvestmentPage> createState() => _QuantInvestmentPageState();
+  ConsumerState<QuantInvestmentPage> createState() =>
+      _QuantInvestmentPageState();
 }
 
 class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
+  final TextEditingController searchCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    searchCtrl.addListener(() async {
+      final dio = ref.read(dioProvider);
+      final response = await dio.get('/api/v1/korea/stocks/삼성');
+
+      print(response);
+      searchCtrl.value = searchCtrl.value.copyWith(
+        text: searchCtrl.text,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF002E5B),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF002E5B),
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30),
-              height: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: const Color(0xFFE5E5E5),
+                  width: 1,
+                ),
                 color: Colors.white,
               ),
-              child: const Center(
+              child: Center(
                   child: Column(
-                children: [],
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 20,
+                    ),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFE5E5E5),
+                          ),
+                        ),
+                        border: OutlineInputBorder(),
+                        hintText: '검색어를 입력해주세요',
+                        hintStyle: TextStyle(
+                          color: Color(0xFFE5E5E5),
+                        ),
+                      ),
+                      controller: searchCtrl,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Container(
+                      width: 275,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: const Color(0xFFE5E5E5),
+                          width: 1,
+                        ),
+                        color: const Color(0xFF002E5B),
+                      ),
+                      child: const Center(
+                        child: Text('Search',
+                            style: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ],
               )),
             )
           ],
