@@ -2,36 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
+import 'package:quant_bot_front/models/quant_models/stock_model.dart';
 import 'package:quant_bot_front/providers/dio_providers.dart';
+import 'package:quant_bot_front/providers/quant_investment_providers.dart';
 
 class QuantInvestmentPage extends ConsumerStatefulWidget {
   const QuantInvestmentPage({super.key});
 
   @override
-  ConsumerState<QuantInvestmentPage> createState() =>
-      _QuantInvestmentPageState();
+  ConsumerState<QuantInvestmentPage> createState() => _QuantInvestmentPageState();
 }
 
 class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
-  final TextEditingController searchCtrl = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    searchCtrl.addListener(() async {
-      final dio = ref.read(dioProvider);
-      final response = await dio.get('/api/v1/korea/stocks/삼성');
-
-      print(response);
-      searchCtrl.value = searchCtrl.value.copyWith(
-        text: searchCtrl.text,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<StockModel> rendering = [];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -76,11 +61,16 @@ class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
                           color: Color(0xFFE5E5E5),
                         ),
                       ),
-                      controller: searchCtrl,
+                      onChanged: (str) async {
+                        ref.read(stockProvider.notifier).state = str;
+                        ref.invalidate(stockListProvider);
+                      },
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(stockListProvider);
+                    },
                     child: Container(
                       width: 275,
                       height: 35,
@@ -105,6 +95,24 @@ class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
                   )
                 ],
               )),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              itemCount: ref.watch(stockListProvider).maybeWhen(
+                    data: (data) => data.length,
+                    orElse: () => 0,
+                  ),
+              itemBuilder: (BuildContext context, int index) {
+                return ref.watch(stockListProvider).when(
+                      data: (data) => Text(data[index].stockName),
+                      error: (error, stackTrace) => const Text('error, stackTrace'),
+                      loading: () => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                return const Text('test');
+              },
             )
           ],
         ),
