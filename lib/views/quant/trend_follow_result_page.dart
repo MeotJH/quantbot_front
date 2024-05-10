@@ -13,12 +13,18 @@ class TrendFollowResultPage extends ConsumerStatefulWidget {
 class _TrendFollowResultPageState extends ConsumerState<TrendFollowResultPage> {
   @override
   Widget build(BuildContext context) {
+    final trendFollow = ref.watch(trendFollowProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
       ),
-      body: Text(ref.read(stockCodeProvider)),
+      body: const Column(
+        children: [
+          //Text(trendFollow.)
+        ],
+      ),
       bottomNavigationBar: const QuantBottomNavigationBar(),
     );
   }
