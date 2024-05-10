@@ -17,7 +17,6 @@ final AutoDisposeFutureProvider<List<StockModel>> stockListProvider = FutureProv
   final List<dynamic> jsonData = result.data;
   final List<StockModel> stockModels = jsonData.map((e) => StockModel.fromJson(e)).toList();
 
-  print('stockModels.length ::::${stockModels.length}');
   return stockModels;
 });
 
@@ -25,3 +24,5 @@ final stockProvider = StateProvider((ref) {
   ref.invalidate(stockListProvider);
   return '';
 });
+
+final stockCodeProvider = StateProvider((ref) => '');
