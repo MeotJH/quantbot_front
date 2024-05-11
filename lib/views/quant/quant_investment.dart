@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
-import 'package:quant_bot_front/models/quant_models/stock_model.dart';
-import 'package:quant_bot_front/providers/dio_providers.dart';
 import 'package:quant_bot_front/providers/quant_investment_providers.dart';
 
 class QuantInvestmentPage extends ConsumerStatefulWidget {
@@ -28,11 +25,11 @@ class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
             tabs: [
               Tab(
                 text: '한국주식',
-                icon: Icon(Icons.directions_car),
+                icon: Icon(Icons.money),
               ),
               Tab(
                 text: '암호화폐',
-                icon: Icon(Icons.directions_transit),
+                icon: Icon(Icons.currency_bitcoin),
               ),
             ],
           ),
