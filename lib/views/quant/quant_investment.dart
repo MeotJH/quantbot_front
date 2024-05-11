@@ -11,7 +11,8 @@ class QuantInvestmentPage extends ConsumerStatefulWidget {
   const QuantInvestmentPage({super.key});
 
   @override
-  ConsumerState<QuantInvestmentPage> createState() => _QuantInvestmentPageState();
+  ConsumerState<QuantInvestmentPage> createState() =>
+      _QuantInvestmentPageState();
 }
 
 class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
@@ -85,7 +86,8 @@ class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
                       data: (data) {
                         return TextButton(
                           onPressed: () {
-                            ref.read(stockCodeProvider.notifier).state = data[index].stockCode;
+                            ref.read(stockProvider.notifier).state =
+                                data[index].stockName;
                             context.push('/quant/trendfollow');
                           },
                           child: Container(
@@ -111,7 +113,8 @@ class _QuantInvestmentPageState extends ConsumerState<QuantInvestmentPage> {
                           ),
                         );
                       },
-                      error: (error, stackTrace) => const Text('error, stackTrace'),
+                      error: (error, stackTrace) =>
+                          const Text('error, stackTrace'),
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
