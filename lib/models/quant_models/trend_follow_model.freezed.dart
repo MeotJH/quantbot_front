@@ -21,7 +21,12 @@ TrendFollowModel _$TrendFollowModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TrendFollowModel {
   String get stockName => throw _privateConstructorUsedError;
-  String get stockCode => throw _privateConstructorUsedError;
+  String get trendFollowPrice => throw _privateConstructorUsedError;
+  String get baseDateClosePrice => throw _privateConstructorUsedError;
+  bool get isBuy => throw _privateConstructorUsedError;
+  String get approval => throw _privateConstructorUsedError;
+  String get market => throw _privateConstructorUsedError;
+  String get stock => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +40,14 @@ abstract class $TrendFollowModelCopyWith<$Res> {
           TrendFollowModel value, $Res Function(TrendFollowModel) then) =
       _$TrendFollowModelCopyWithImpl<$Res, TrendFollowModel>;
   @useResult
-  $Res call({String stockName, String stockCode});
+  $Res call(
+      {String stockName,
+      String trendFollowPrice,
+      String baseDateClosePrice,
+      bool isBuy,
+      String approval,
+      String market,
+      String stock});
 }
 
 /// @nodoc
@@ -52,16 +64,41 @@ class _$TrendFollowModelCopyWithImpl<$Res, $Val extends TrendFollowModel>
   @override
   $Res call({
     Object? stockName = null,
-    Object? stockCode = null,
+    Object? trendFollowPrice = null,
+    Object? baseDateClosePrice = null,
+    Object? isBuy = null,
+    Object? approval = null,
+    Object? market = null,
+    Object? stock = null,
   }) {
     return _then(_value.copyWith(
       stockName: null == stockName
           ? _value.stockName
           : stockName // ignore: cast_nullable_to_non_nullable
               as String,
-      stockCode: null == stockCode
-          ? _value.stockCode
-          : stockCode // ignore: cast_nullable_to_non_nullable
+      trendFollowPrice: null == trendFollowPrice
+          ? _value.trendFollowPrice
+          : trendFollowPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      baseDateClosePrice: null == baseDateClosePrice
+          ? _value.baseDateClosePrice
+          : baseDateClosePrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      isBuy: null == isBuy
+          ? _value.isBuy
+          : isBuy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      approval: null == approval
+          ? _value.approval
+          : approval // ignore: cast_nullable_to_non_nullable
+              as String,
+      market: null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as String,
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -75,7 +112,14 @@ abstract class _$$TrendFollowModelImplCopyWith<$Res>
       __$$TrendFollowModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stockName, String stockCode});
+  $Res call(
+      {String stockName,
+      String trendFollowPrice,
+      String baseDateClosePrice,
+      bool isBuy,
+      String approval,
+      String market,
+      String stock});
 }
 
 /// @nodoc
@@ -90,16 +134,41 @@ class __$$TrendFollowModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stockName = null,
-    Object? stockCode = null,
+    Object? trendFollowPrice = null,
+    Object? baseDateClosePrice = null,
+    Object? isBuy = null,
+    Object? approval = null,
+    Object? market = null,
+    Object? stock = null,
   }) {
     return _then(_$TrendFollowModelImpl(
       stockName: null == stockName
           ? _value.stockName
           : stockName // ignore: cast_nullable_to_non_nullable
               as String,
-      stockCode: null == stockCode
-          ? _value.stockCode
-          : stockCode // ignore: cast_nullable_to_non_nullable
+      trendFollowPrice: null == trendFollowPrice
+          ? _value.trendFollowPrice
+          : trendFollowPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      baseDateClosePrice: null == baseDateClosePrice
+          ? _value.baseDateClosePrice
+          : baseDateClosePrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      isBuy: null == isBuy
+          ? _value.isBuy
+          : isBuy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      approval: null == approval
+          ? _value.approval
+          : approval // ignore: cast_nullable_to_non_nullable
+              as String,
+      market: null == market
+          ? _value.market
+          : market // ignore: cast_nullable_to_non_nullable
+              as String,
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -109,7 +178,14 @@ class __$$TrendFollowModelImplCopyWithImpl<$Res>
 
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class _$TrendFollowModelImpl implements _TrendFollowModel {
-  _$TrendFollowModelImpl({this.stockName = '', this.stockCode = ''});
+  _$TrendFollowModelImpl(
+      {this.stockName = '',
+      this.trendFollowPrice = '',
+      this.baseDateClosePrice = '',
+      this.isBuy = false,
+      this.approval = '',
+      this.market = '',
+      this.stock = ''});
 
   factory _$TrendFollowModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrendFollowModelImplFromJson(json);
@@ -119,11 +195,26 @@ class _$TrendFollowModelImpl implements _TrendFollowModel {
   final String stockName;
   @override
   @JsonKey()
-  final String stockCode;
+  final String trendFollowPrice;
+  @override
+  @JsonKey()
+  final String baseDateClosePrice;
+  @override
+  @JsonKey()
+  final bool isBuy;
+  @override
+  @JsonKey()
+  final String approval;
+  @override
+  @JsonKey()
+  final String market;
+  @override
+  @JsonKey()
+  final String stock;
 
   @override
   String toString() {
-    return 'TrendFollowModel(stockName: $stockName, stockCode: $stockCode)';
+    return 'TrendFollowModel(stockName: $stockName, trendFollowPrice: $trendFollowPrice, baseDateClosePrice: $baseDateClosePrice, isBuy: $isBuy, approval: $approval, market: $market, stock: $stock)';
   }
 
   @override
@@ -133,13 +224,21 @@ class _$TrendFollowModelImpl implements _TrendFollowModel {
             other is _$TrendFollowModelImpl &&
             (identical(other.stockName, stockName) ||
                 other.stockName == stockName) &&
-            (identical(other.stockCode, stockCode) ||
-                other.stockCode == stockCode));
+            (identical(other.trendFollowPrice, trendFollowPrice) ||
+                other.trendFollowPrice == trendFollowPrice) &&
+            (identical(other.baseDateClosePrice, baseDateClosePrice) ||
+                other.baseDateClosePrice == baseDateClosePrice) &&
+            (identical(other.isBuy, isBuy) || other.isBuy == isBuy) &&
+            (identical(other.approval, approval) ||
+                other.approval == approval) &&
+            (identical(other.market, market) || other.market == market) &&
+            (identical(other.stock, stock) || other.stock == stock));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, stockName, stockCode);
+  int get hashCode => Object.hash(runtimeType, stockName, trendFollowPrice,
+      baseDateClosePrice, isBuy, approval, market, stock);
 
   @JsonKey(ignore: true)
   @override
@@ -157,8 +256,14 @@ class _$TrendFollowModelImpl implements _TrendFollowModel {
 }
 
 abstract class _TrendFollowModel implements TrendFollowModel {
-  factory _TrendFollowModel({final String stockName, final String stockCode}) =
-      _$TrendFollowModelImpl;
+  factory _TrendFollowModel(
+      {final String stockName,
+      final String trendFollowPrice,
+      final String baseDateClosePrice,
+      final bool isBuy,
+      final String approval,
+      final String market,
+      final String stock}) = _$TrendFollowModelImpl;
 
   factory _TrendFollowModel.fromJson(Map<String, dynamic> json) =
       _$TrendFollowModelImpl.fromJson;
@@ -166,7 +271,17 @@ abstract class _TrendFollowModel implements TrendFollowModel {
   @override
   String get stockName;
   @override
-  String get stockCode;
+  String get trendFollowPrice;
+  @override
+  String get baseDateClosePrice;
+  @override
+  bool get isBuy;
+  @override
+  String get approval;
+  @override
+  String get market;
+  @override
+  String get stock;
   @override
   @JsonKey(ignore: true)
   _$$TrendFollowModelImplCopyWith<_$TrendFollowModelImpl> get copyWith =>

@@ -10,12 +10,22 @@ _$TrendFollowModelImpl _$$TrendFollowModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TrendFollowModelImpl(
       stockName: json['stockName'] as String? ?? '',
-      stockCode: json['stockCode'] as String? ?? '',
+      trendFollowPrice: json['trendFollowPrice'] as String? ?? '',
+      baseDateClosePrice: json['baseDateClosePrice'] as String? ?? '',
+      isBuy: json['isBuy'] as bool? ?? false,
+      approval: json['approval'] as String? ?? '',
+      market: json['market'] as String? ?? '',
+      stock: json['stock'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$TrendFollowModelImplToJson(
         _$TrendFollowModelImpl instance) =>
     <String, dynamic>{
       'stockName': instance.stockName,
-      'stockCode': instance.stockCode,
+      'trendFollowPrice': instance.trendFollowPrice,
+      'baseDateClosePrice': instance.baseDateClosePrice,
+      'isBuy': instance.isBuy,
+      'approval': instance.approval,
+      'market': instance.market,
+      'stock': instance.stock,
     };

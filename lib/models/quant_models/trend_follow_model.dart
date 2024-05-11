@@ -11,7 +11,13 @@ class TrendFollowModel with _$TrendFollowModel {
   )
   factory TrendFollowModel({
     @Default('') String stockName,
-    @Default('') String stockCode,
+    @Default('') String trendFollowPrice,
+    @Default('') String baseDateClosePrice,
+    @Default(false) bool isBuy,
+    @Default('') String approval,
+    @Default('') String market,
+    @Default('') String stock,
   }) = _TrendFollowModel;
-  factory TrendFollowModel.fromJson(Map<String, dynamic> json) => _$TrendFollowModelFromJson(json);
+  factory TrendFollowModel.fromJson(Map<String, dynamic> json) =>
+      _$TrendFollowModelFromJson(json);
 }
