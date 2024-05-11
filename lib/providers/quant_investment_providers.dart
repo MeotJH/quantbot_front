@@ -9,8 +9,8 @@ final AutoDisposeFutureProvider<List<StockModel>> stockListProvider =
     FutureProvider.autoDispose((ref) async {
   final dio = ref.read(dioProvider);
   final stock = ref.watch(stockProvider);
-
-  final result = await dio.get('/api/v1/korea/stocks/$stock');
+  final market = ref.read(marketProvider);
+  final result = await dio.get('/api/v1/$market/stocks/$stock');
 
   if (result.statusCode != HttpStatus.ok) {
     return [];
@@ -29,13 +29,13 @@ final stockProvider = StateProvider((ref) {
 });
 
 final stockCodeProvider = StateProvider((ref) => '');
+final marketProvider = StateProvider((ref) => 'korea');
 
 final AutoDisposeFutureProvider<TrendFollowModel> trendFollowProvider =
     FutureProvider.autoDispose((ref) async {
   final dio = ref.read(dioProvider);
   final stock = ref.watch(stockProvider);
-
-  const market = 'korea';
+  final market = ref.read(marketProvider);
   final result = await dio.get('/api/v2/trend-follow/$market/$stock');
 
   if (result.statusCode != HttpStatus.ok) {
