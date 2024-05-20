@@ -8,6 +8,8 @@ import 'package:quant_bot_front/views/quant/trend_follow_result_page.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'views/users/login_page.dart';
+
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
@@ -32,6 +34,12 @@ final GoRouter _router = GoRouter(
       path: '/quant/trendfollow',
       builder: (BuildContext context, GoRouterState state) {
         return const TrendFollowResultPage();
+      },
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        return const LoginPage();
       },
     ),
   ],
