@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quant_bot_front/models/user_models/user_login_model.dart';
+import 'package:quant_bot_front/providers/user_providers.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  TextEditingController userIdController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +50,7 @@ class LoginPage extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
                         ),
                       ),
-                      controller: TextEditingController(),
+                      controller: userIdController,
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
@@ -48,20 +59,27 @@ class LoginPage extends StatelessWidget {
                         border: OutlineInputBorder(),
                       ),
                       obscureText: true,
+                      controller: passwordController,
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF262B40), // Change this to your desired button color
+                          backgroundColor: const Color(0xFF262B40),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          minimumSize: const Size(200, 50), // Change these values as needed
+                          minimumSize: const Size(200, 50),
                         ),
-                        onPressed: () {
-                          // Handle button press here
+                        onPressed: () async {
+                          await ref.read(userProvider.notifier).handleLogin(UserLoginModel(
+                                userId: userIdController.text,
+                                password: passwordController.text,
+                              ));
+                          if (mounted) {
+                            context.go('/');
+                          }
                         },
                         child: const Text(
                           'Login',
