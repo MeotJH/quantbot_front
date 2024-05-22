@@ -59,18 +59,19 @@ final AutoDisposeFutureProvider<List<TrendFollowChartModel>>
 
   final Map<String, dynamic> jsonData = result.data;
   final length = jsonData['trendFollowPrices']?.length ?? 0;
+
   return List.generate(length, (i) {
     int reversedIndex = length - 1 - i;
     return TrendFollowChartModel.of(
       trendFollowPrice:
           (jsonData['trendFollowPrices']?[reversedIndex] as double)
-                  .toStringAsFixed(2) ??
-              "0.00",
+              .toStringAsFixed(0),
       isBuy: jsonData['isBuy']?[reversedIndex] ?? false,
-      baseDt: formatDateFromJson(date: jsonData['baseDt']?[reversedIndex]),
-      closePrice: (jsonData['closePrice']?[reversedIndex] as double)
-              .toStringAsFixed(2) ??
-          "0.00",
+      baseDt: market == 'korea'
+          ? jsonData['baseDt'][reversedIndex]
+          : formatDateFromJson(date: jsonData['baseDt'][reversedIndex]),
+      closePrice:
+          (jsonData['closePrice']?[reversedIndex] as double).toStringAsFixed(2),
     );
   }).toList();
 });
