@@ -12,8 +12,15 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  TextEditingController userIdController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController userIdController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    userIdController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +84,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 userId: userIdController.text,
                                 password: passwordController.text,
                               ));
-                          if (mounted) {
-                            context.go('/');
-                          }
+                          await ref.read(userProvider.notifier).setUser();
+                          if (!mounted) return;
+                          context.go('/');
                         },
                         child: const Text(
                           'Login',
