@@ -17,7 +17,7 @@ class DioNotifier extends Notifier<Dio> {
 
   void updateAccessToken(String token) {
     _dio.options = _dio.options.copyWith(
-      headers: {'Authorization': 'Bearer $token'},
+      headers: {'Authorization': token},
     );
   }
 }

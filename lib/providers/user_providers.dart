@@ -1,12 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quant_bot_front/models/user_models/user_login_model.dart';
+import 'package:quant_bot_front/models/user_models/user_model.dart';
 import 'package:quant_bot_front/providers/dio_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserNotifier extends AutoDisposeAsyncNotifier<void> {
+class UserNotifier extends AutoDisposeAsyncNotifier<UserModel> {
   @override
-  Future<dynamic> build() async => {};
+  Future<UserModel> build() async {
+    final prefs = await SharedPreferences.getInstance();
+    final accessToken = prefs.getString('Authorization');
+
+    if (accessToken != null) {
+      final dioNotifier = ref.read(dioProvider.notifier);
+      dioNotifier.updateAccessToken(accessToken);
+
+      return await setUser();
+    }
+
+    return UserModel(userId: '', roles: []);
+  }
 
   Future<void> handleLogin(UserLoginModel model) async {
     final dio = ref.read(dioProvider);
@@ -17,7 +30,8 @@ class UserNotifier extends AutoDisposeAsyncNotifier<void> {
     await prefs.setString('RefreshToken', 'Bearer ${response.data['refreshToken']}');
 
     final dioNotifier = ref.read(dioProvider.notifier);
-    dioNotifier.updateAccessToken(response.data['accessToken']);
+    dioNotifier.updateAccessToken('Bearer ${response.data['accessToken']}');
+    ref.invalidateSelf();
   }
 
   Future<void> handleLogout() async {
@@ -31,12 +45,17 @@ class UserNotifier extends AutoDisposeAsyncNotifier<void> {
     dioNotifier.updateAccessToken('');
   }
 
-  Future<void> setUser() async {
+  Future<UserModel> setUser() async {
     final response = await ref.read(dioProvider).get('/api/v1/users/me');
-    print('this is response.data ${response.data}');
+    final model = UserModel.fromJson(
+      response.data,
+    );
+    return UserModel.fromJson(
+      response.data,
+    );
   }
 }
 
-final userProvider = AsyncNotifierProvider.autoDispose<UserNotifier, void>(
+final userProvider = AsyncNotifierProvider.autoDispose<UserNotifier, UserModel>(
   UserNotifier.new,
 );

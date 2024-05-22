@@ -43,13 +43,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (percent <= inflation) {
       print('연 투자수익이 물가상승률 보다 커야합니다.');
     }
-    final result =
-        money * (pow((1.0 + inflation), year)) / (percent - inflation);
-    print('this is result $result');
+    final result = money * (pow((1.0 + inflation), year)) / (percent - inflation);
     retireResult = result.toStringAsFixed(0);
     setState(() {
-      retireResult =
-          " ${parseKoreaMoney(beforeParse: result.toStringAsFixed(0))}원";
+      retireResult = " ${parseKoreaMoney(beforeParse: result.toStringAsFixed(0))}원";
     });
   }
 
@@ -296,8 +293,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey
-                          .withOpacity(0.2), // Set color with opacity
+                      color: Colors.grey.withOpacity(0.2), // Set color with opacity
                       spreadRadius: 2, // Set the spread radius
                       blurRadius: 2, // Set the blur radius
                       offset: const Offset(0, 1), // Set the shadow offset
@@ -329,8 +325,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey
-                          .withOpacity(0.2), // Set color with opacity
+                      color: Colors.grey.withOpacity(0.2), // Set color with opacity
                       spreadRadius: 2, // Set the spread radius
                       blurRadius: 2, // Set the blur radius
                       offset: const Offset(0, 1), // Set the shadow offset

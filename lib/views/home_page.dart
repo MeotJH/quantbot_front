@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
 import 'package:quant_bot_front/providers/home_provider.dart';
+import 'package:quant_bot_front/providers/user_providers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends ConsumerStatefulWidget {
