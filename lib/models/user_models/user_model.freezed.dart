@@ -108,7 +108,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
 
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 class _$UserModelImpl implements _UserModel {
-  _$UserModelImpl({this.userId = 'ㅇㅇㅇㅇ', final List<dynamic> roles = const []})
+  _$UserModelImpl({this.userId = '', final List<dynamic> roles = const []})
       : _roles = roles;
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>

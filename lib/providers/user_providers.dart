@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:quant_bot_front/models/user_models/user_login_model.dart';
 import 'package:quant_bot_front/models/user_models/user_model.dart';
 import 'package:quant_bot_front/providers/dio_providers.dart';
@@ -26,8 +25,10 @@ class UserNotifier extends AutoDisposeAsyncNotifier<UserModel> {
     final response = await dio.post('/api/v1/login', data: model.toJson());
 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('Authorization', 'Bearer ${response.data['accessToken']}');
-    await prefs.setString('RefreshToken', 'Bearer ${response.data['refreshToken']}');
+    await prefs.setString(
+        'Authorization', 'Bearer ${response.data['accessToken']}');
+    await prefs.setString(
+        'RefreshToken', 'Bearer ${response.data['refreshToken']}');
 
     final dioNotifier = ref.read(dioProvider.notifier);
     dioNotifier.updateAccessToken('Bearer ${response.data['accessToken']}');
@@ -47,9 +48,6 @@ class UserNotifier extends AutoDisposeAsyncNotifier<UserModel> {
 
   Future<UserModel> setUser() async {
     final response = await ref.read(dioProvider).get('/api/v1/users/me');
-    final model = UserModel.fromJson(
-      response.data,
-    );
     return UserModel.fromJson(
       response.data,
     );
