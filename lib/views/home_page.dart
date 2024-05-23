@@ -66,9 +66,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                     future: getToken(),
                     builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator(); // or some other loading widget
+                        return const CircularProgressIndicator();
                       }
-                      print('snapshot.data: ${snapshot.data}');
                       if (snapshot.data == null) {
                         return ElevatedButton(
                           onPressed: () {
@@ -76,7 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           },
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10), // adjust as needed
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               backgroundColor: Colors.blue.shade300),
                           child: const Text(
@@ -159,12 +158,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                         loading: () => const Center(
                           child: CircularProgressIndicator(),
                         ),
-                        error: (error, stackTrace) => Center(
-                          child: Text(
-                            '에러: $error, $stackTrace',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
+                        error: (error, stackTrace) {
+                          print(' $error, $stackTrace');
+                          return const Center(
+                            child: Text(
+                              '모.. 몬가 잘못되었음',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                        },
                       );
                 },
                 separatorBuilder: (
@@ -233,12 +235,15 @@ class _HomePageState extends ConsumerState<HomePage> {
                           loading: () => const Center(
                             child: CircularProgressIndicator(),
                           ),
-                          error: (error, stackTrace) => Center(
-                            child: Text(
-                              '에러: $error, $stackTrace',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
+                          error: (error, stackTrace) {
+                            print(' $error, $stackTrace');
+                            return const Center(
+                              child: Text(
+                                '모.. 몬가 잘못되었음',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            );
+                          },
                         );
                   },
                   separatorBuilder: (
