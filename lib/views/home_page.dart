@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quant_bot_front/comm/constants/auth_constants.dart';
 import 'package:quant_bot_front/components/quant_bottom_navagation_bar.dart';
 import 'package:quant_bot_front/providers/home_provider.dart';
 import 'package:quant_bot_front/providers/user_providers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -14,6 +17,11 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(AuthConstant.authorization);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,17 +62,45 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ),
                     ],
                   ),
-                  Container(
-                    width: 43,
-                    height: 43,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Image.asset(
-                      'assets/icon.png',
-                    ),
-                  ),
+                  FutureBuilder<String?>(
+                    future: getToken(),
+                    builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator(); // or some other loading widget
+                      }
+                      print('snapshot.data: ${snapshot.data}');
+                      if (snapshot.data == null) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            context.push('/login');
+                          },
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10), // adjust as needed
+                              ),
+                              backgroundColor: Colors.blue.shade300),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          width: 43,
+                          height: 43,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: Image.asset(
+                            'assets/icon.png',
+                          ),
+                        );
+                      }
+                    },
+                  )
                 ],
               ),
               const Text(
@@ -86,8 +122,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           return TextButton(
                             onPressed: () async {
                               final Uri toLaunch = Uri.parse(data[index].href);
-                              await launchUrl(toLaunch,
-                                  mode: LaunchMode.inAppWebView);
+                              await launchUrl(toLaunch, mode: LaunchMode.inAppWebView);
                             },
                             child: Container(
                               height: 300,
@@ -156,8 +191,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     return ref.watch(homeMaketProvider).when(
                           data: (data) {
                             return Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
                               height: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
